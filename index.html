@@ -1,0 +1,1489 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,900" rel="stylesheet">
+  
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <style>
+    /**
+       * Selectize bootstrap 4
+       */
+
+    a {
+        color: white;
+    }
+
+    .selectize-control {
+        position: relative;
+    }
+
+    .selectize-dropdown,
+    .selectize-input,
+    .selectize-input input {
+        font-family: inherit;
+        font-size: inherit;
+        line-height: 1.5;
+        -webkit-font-smoothing: inherit;
+    }
+
+    .selectize-input,
+    .selectize-control.single .selectize-input.input-active {
+        background: #fff;
+        cursor: text;
+        display: inline-block;
+    }
+
+    .selectize-input {
+        border: 1px solid #ced4da;
+        padding: 0.375rem 0.75rem;
+        display: inline-block;
+        width: 100%;
+        overflow: hidden;
+        position: relative;
+        z-index: 1;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+        -webkit-border-radius: 0.25rem;
+        -moz-border-radius: 0.25rem;
+        border-radius: 0.25rem;
+    }
+
+    .selectize-control.multi .selectize-input.has-items {
+        padding: calc(0.375rem - 1px - 0px) 0.75rem calc(0.375rem - 1px - 3px - 0px);
+    }
+
+    .selectize-input.full {
+        background-color: #fff;
+    }
+
+    .selectize-input.disabled,
+    .selectize-input.disabled * {
+        cursor: default !important;
+    }
+
+    .selectize-input.dropdown-active {
+        -webkit-border-radius: 0.25rem 0.25rem 0 0;
+        -moz-border-radius: 0.25rem 0.25rem 0 0;
+        border-radius: 0.25rem 0.25rem 0 0;
+    }
+
+    .selectize-input>* {
+        vertical-align: baseline;
+        display: -moz-inline-stack;
+        display: inline-block;
+        zoom: 1;
+        *display: inline;
+    }
+
+    .selectize-control.multi .selectize-input>div {
+        cursor: pointer;
+        margin: 0 3px 3px 0;
+        padding: 1px 3px;
+        background: #efefef;
+        color: #343a40;
+        border: 0px solid #999;
+    }
+
+    .selectize-control.multi .selectize-input>div.active {
+        background: #007bff;
+        color: #fff;
+        border: 0px solid rgba(0, 0, 0, 0);
+    }
+
+    .selectize-control.multi .selectize-input.disabled>div,
+    .selectize-control.multi .selectize-input.disabled>div.active {
+        color: #878787;
+        background: white;
+        border: 0px solid #e6e6e6;
+    }
+
+    .selectize-input>input {
+        display: inline-block !important;
+        padding: 0 !important;
+        min-height: 0 !important;
+        max-height: none !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        text-indent: 0 !important;
+        border: 0 none !important;
+        background: none !important;
+        line-height: inherit !important;
+        -webkit-user-select: auto !important;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+    }
+
+    .selectize-input>input::-ms-clear {
+        display: none;
+    }
+
+    .selectize-input>input:focus {
+        outline: none !important;
+    }
+
+    .selectize-input::after {
+        content: ' ';
+        display: block;
+        clear: left;
+    }
+
+    .selectize-input.dropdown-active::before {
+        content: ' ';
+        display: block;
+        position: absolute;
+        background: white;
+        height: 1px;
+        bottom: 0;
+        left: 0;
+        right: 0;
+    }
+
+    .selectize-dropdown {
+        position: absolute;
+        z-index: 10;
+        border: 1px solid #d0d0d0;
+        background: #fff;
+        margin: -1px 0 0 0;
+        border-top: 0 none;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        -webkit-border-radius: 0 0 0.25rem 0.25rem;
+        -moz-border-radius: 0 0 0.25rem 0.25rem;
+        border-radius: 0 0 0.25rem 0.25rem;
+    }
+
+    .selectize-dropdown [data-selectable] {
+        cursor: pointer;
+        overflow: hidden;
+    }
+
+    .selectize-dropdown [data-selectable] .highlight {
+        background: rgba(255, 237, 40, 0.4);
+        -webkit-border-radius: 1px;
+        -moz-border-radius: 1px;
+        border-radius: 1px;
+    }
+
+    .selectize-dropdown .option,
+    .selectize-dropdown .optgroup-header {
+        padding: 3px 0.75rem;
+    }
+
+    .selectize-dropdown .option,
+    .selectize-dropdown [data-disabled],
+    .selectize-dropdown [data-disabled] [data-selectable].option {
+        cursor: inherit;
+        opacity: 0.5;
+    }
+
+    .selectize-dropdown [data-selectable].option {
+        opacity: 1;
+    }
+
+    .selectize-dropdown .optgroup:first-child .optgroup-header {
+        border-top: 0 none;
+    }
+
+    .selectize-dropdown .optgroup-header {
+        color: #6c757d;
+        background: #fff;
+        cursor: default;
+    }
+
+    .selectize-dropdown .active {
+        background-color: #007bff;
+        color: #fff;
+    }
+
+    .selectize-dropdown .active.create {
+        color: #16181b;
+    }
+
+    .selectize-dropdown .create {
+        color: rgba(52, 58, 64, 0.5);
+    }
+
+    .selectize-dropdown-content {
+        overflow-y: auto;
+        overflow-x: hidden;
+        max-height: 200px;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .selectize-control.single .selectize-input,
+    .selectize-control.single .selectize-input input {
+        cursor: pointer;
+    }
+
+    .selectize-control.single .selectize-input.input-active,
+    .selectize-control.single .selectize-input.input-active input {
+        cursor: text;
+    }
+
+    .selectize-control.single .selectize-input:after {
+        content: ' ';
+        display: block;
+        position: absolute;
+        top: 50%;
+        right: calc(0.75rem + 5px);
+        margin-top: -3px;
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 5px 5px 0 5px;
+        border-color: #343a40 transparent transparent transparent;
+    }
+
+    .selectize-control.single .selectize-input.dropdown-active:after {
+        margin-top: -4px;
+        border-width: 0 5px 5px 5px;
+        border-color: transparent transparent #343a40 transparent;
+    }
+
+    .selectize-control.rtl.single .selectize-input:after {
+        left: calc(0.75rem + 5px);
+        right: auto;
+    }
+
+    .selectize-control.rtl .selectize-input>input {
+        margin: 0 4px 0 -2px !important;
+    }
+
+    .selectize-control .selectize-input.disabled {
+        opacity: 0.5;
+        background-color: #fff;
+    }
+
+    .selectize-control.plugin-drag_drop.multi>.selectize-input>div.ui-sortable-placeholder {
+        visibility: visible !important;
+        background: #f2f2f2 !important;
+        background: rgba(0, 0, 0, 0.06) !important;
+        border: 0 none !important;
+        -webkit-box-shadow: inset 0 0 12px 4px #fff;
+        box-shadow: inset 0 0 12px 4px #fff;
+    }
+
+    .selectize-control.plugin-drag_drop .ui-sortable-placeholder::after {
+        content: '!';
+        visibility: hidden;
+    }
+
+    .selectize-control.plugin-drag_drop .ui-sortable-helper {
+        -webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    .selectize-dropdown-header {
+        position: relative;
+        padding: 3px 0.75rem;
+        border-bottom: 1px solid #d0d0d0;
+        background: #f8f8f8;
+        -webkit-border-radius: 0.25rem 0.25rem 0 0;
+        -moz-border-radius: 0.25rem 0.25rem 0 0;
+        border-radius: 0.25rem 0.25rem 0 0;
+    }
+
+    .selectize-dropdown-header-close {
+        position: absolute;
+        right: 0.75rem;
+        top: 50%;
+        color: #343a40;
+        opacity: 0.4;
+        margin-top: -12px;
+        line-height: 20px;
+        font-size: 20px !important;
+    }
+
+    .selectize-dropdown-header-close:hover {
+        color: black;
+    }
+
+    .selectize-dropdown.plugin-optgroup_columns .optgroup {
+        border-right: 1px solid #f2f2f2;
+        border-top: 0 none;
+        float: left;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+
+    .selectize-dropdown.plugin-optgroup_columns .optgroup:last-child {
+        border-right: 0 none;
+    }
+
+    .selectize-dropdown.plugin-optgroup_columns .optgroup:before {
+        display: none;
+    }
+
+    .selectize-dropdown.plugin-optgroup_columns .optgroup-header {
+        border-top: 0 none;
+    }
+
+    .selectize-control.plugin-remove_button [data-value] {
+        position: relative;
+        padding-right: 24px !important;
+    }
+
+    .selectize-control.plugin-remove_button [data-value] .remove {
+        z-index: 1;
+        /* fixes ie bug (see #392) */
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        width: 17px;
+        text-align: center;
+        font-weight: bold;
+        font-size: 12px;
+        color: inherit;
+        text-decoration: none;
+        vertical-align: middle;
+        display: inline-block;
+        padding: 1px 0 0 0;
+        border-left: 1px solid #999;
+        -webkit-border-radius: 0 2px 2px 0;
+        -moz-border-radius: 0 2px 2px 0;
+        border-radius: 0 2px 2px 0;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+
+    .selectize-control.plugin-remove_button [data-value] .remove:hover {
+        background: rgba(0, 0, 0, 0.05);
+    }
+
+    .selectize-control.plugin-remove_button [data-value].active .remove {
+        border-left-color: rgba(0, 0, 0, 0);
+    }
+
+    .selectize-control.plugin-remove_button .disabled [data-value] .remove:hover {
+        background: none;
+    }
+
+    .selectize-control.plugin-remove_button .disabled [data-value] .remove {
+        border-left-color: #e6e6e6;
+    }
+
+    .selectize-control.plugin-remove_button .remove-single {
+        position: absolute;
+        right: 0;
+        top: 0;
+        font-size: 23px;
+    }
+
+    .selectize-dropdown,
+    .selectize-dropdown.form-control {
+        height: auto;
+        padding: 0;
+        margin: 2px 0 0 0;
+        z-index: 1000;
+        background: #fff;
+        border: 1px solid rgba(0, 0, 0, 0.15);
+        -webkit-border-radius: 0.25rem;
+        -moz-border-radius: 0.25rem;
+        border-radius: 0.25rem;
+        -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+    }
+
+    .selectize-dropdown .optgroup-header {
+        font-size: 0.875rem;
+        line-height: 1.5;
+    }
+
+    .selectize-dropdown .optgroup:first-child:before {
+        display: none;
+    }
+
+    .selectize-dropdown .optgroup:before {
+        content: ' ';
+        display: block;
+        height: 0;
+        margin: 0.5rem 0;
+        overflow: hidden;
+        border-top: 1px solid #e5e5e5;
+        margin-left: -0.75rem;
+        margin-right: -0.75rem;
+    }
+
+    .selectize-dropdown .create {
+        padding-left: 0.75rem;
+    }
+
+    .selectize-dropdown-content {
+        padding: 5px 0;
+    }
+
+    .selectize-dropdown-header {
+        padding: 6px 0.75rem;
+    }
+
+    .selectize-input {
+        min-height: calc(2.25rem + 2px);
+        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    }
+
+    .selectize-input.dropdown-active {
+        -webkit-border-radius: 0.25rem;
+        -moz-border-radius: 0.25rem;
+        border-radius: 0.25rem;
+    }
+
+    .selectize-input.dropdown-active::before {
+        display: none;
+    }
+
+    .selectize-input.focus {
+        outline: 0;
+    }
+
+    .is-invalid .selectize-input {
+        border-color: #dc3545;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    }
+
+    .is-invalid .selectize-input:focus {
+        border-color: #bd2130;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #eb8c95;
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #eb8c95;
+    }
+
+    .selectize-control.multi .selectize-input.has-items {
+        padding-left: calc(0.75rem - 3px);
+        padding-right: calc(0.75rem - 3px);
+    }
+
+    .selectize-control.multi .selectize-input>div {
+        -webkit-border-radius: calc(0.25rem - 1px);
+        -moz-border-radius: calc(0.25rem - 1px);
+        border-radius: calc(0.25rem - 1px);
+    }
+
+    .form-control.selectize-control {
+        padding: 0;
+        height: auto;
+        border: none;
+        background: none;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+        -webkit-border-radius: 0;
+        -moz-border-radius: 0;
+        border-radius: 0;
+    }
+
+    .input-group .selectize-input {
+        overflow: unset;
+        -webkit-border-radius: 0 0.25rem 0.25rem 0;
+        -moz-border-radius: 0 0.25rem 0.25rem 0;
+        border-radius: 0 0.25rem 0.25rem 0;
+    }
+
+    .selectize-input.items.full.has-options.has-items {
+        border: 0px;
+        border-bottom: 3px solid #ddd;
+        background: transparent;
+    }
+    </style>
+    <style type="text/css">
+    body {
+        font-family: "Lato", sans-serif;
+        background: rgb(233, 234, 229) url("bg.png");
+    }
+
+    .outer-box {
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.19), 0 3px 9px rgba(0, 0, 0, 0.23);
+        border-radius: 3px;
+        margin: 40px 50px;
+        min-height: 200px;
+        background: white;
+        position: relative;
+    }
+
+    .section1 {
+        background: white url(bg.png);
+        padding: 0px 60px 30px;
+    }
+
+    body {
+        font-family: "Lato", sans-serif;
+
+        color: #000;
+
+    }
+
+    #globe-vis circle {
+        fill: none;
+        stroke: rgb(0, 0, 0, 0.12);
+        stroke-width: 1px;
+    }
+
+    .globe-vis path {
+        fill: grey
+            /*#D99628;*/
+    }
+
+    .page-headers {
+        background: #ffe300;
+        color: black;
+        margin: 26px 0px;
+        border-radius: 0px 2px 2px 0px;
+        font-size: 20px;
+        margin-left: -35px;
+        padding: 10px 35px;
+    }
+
+    .page-headers h1 {
+        font-size: 19px;
+        font-weight: 600;
+    }
+
+    .hai {
+        fill: yellow;
+    }
+
+    .graticule {
+        fill: none;
+        stroke: rgba(0, 0, 0, 0.5);
+        stroke-width: .6px;
+        stroke-opacity: .1;
+    }
+
+    .header-title {
+        margin-top: 150px;
+        font-weight: 300;
+        font-size: 27px;
+        font-family: 'Lato', sans-serif;
+    }
+
+    .header-title-sub {
+        display: block;
+        font-weight: 700;
+    }
+
+    #vis-container {
+        margin-top: 40px;
+    }
+
+    .slide1-select-dropdown {
+        margin-bottom: 30px;
+    }
+
+    .header-text {
+        font-weight: 300;
+        margin-top: 30px;
+        padding-right: 50px;
+    }
+
+    .section-divider {
+        height: 8px;
+        background: rgba(0, 0, 0, 0.8117647058823529);
+    }
+
+    .header-special-text {
+        font-weight: 900;
+        font-size: 16px;
+        font-family: "Lato", serif;
+    }
+
+    .nav-pills .nav-link {
+        background: rgba(128, 128, 128, 0.16);
+        border-radius: 0px;
+        color: #000000cf;
+        font-weight: 900;
+        padding: 20px 20px;
+        font-size: 15px;
+    }
+
+    .nav-pills .nav-link.active,
+    .nav-pills .show>.nav-link {
+        color: #fff;
+        background-color: #2f353a;
+    }
+
+    .sidenav {
+        margin: 0px -15px;
+        border-right: 1px solid rgba(0, 0, 0, 0.28);
+    }
+
+    svg#globe-vis {
+        cursor: grab;
+    }
+
+    svg#globe-vis:active {
+        /* background: black; */
+        cursor: grabbing;
+    }
+
+    .section2 a.nav-link {
+        padding: 30px;
+        font-weight: 900;
+        background: #ddd;
+        color: #495057;
+        font-size: 22px;
+        border-radius: 5px 5px 0px 0px;
+        border: 1px solid white;
+    }
+
+    div.tab-pane {
+        padding: 0px 100px 50px;
+    }
+
+    .indicator {
+        font-weight: 600;
+    }
+
+    .indicator-row {
+        padding: 20px 0px;
+        border-top: 1px dashed #0000006e;
+    }
+
+    .indicator-row:first-child {
+        border-top: none;
+    }
+
+    .color-key {
+        padding: 20px 170px;
+    }
+
+    span.key-color {
+        display: inline-flex;
+        width: 25px;
+        vertical-align: bottom;
+        height: 20px;
+        margin-right: 10px;
+        border-radius: 3px;
+    }
+
+    span.key-text {
+        font-weight: 600;
+        color: rgba(0, 0, 0, 0.67);
+    }
+
+    .indexes {
+        margin-top: 40px;
+        padding: 0px 100px;
+    }
+
+    .header-index {
+        padding-left: 50px;
+        font-size: 13px;
+    }
+
+    .indicator-row:first-child {
+        padding-top: 0px;
+    }
+
+    .section-highlight {
+        padding: 70px 100px;
+        color: white;
+    }
+
+    footer {
+        background: #343a3f;
+        border-radius: 0px 0px 8px 9px;
+        padding: 30px;
+        text-align: center;
+        padding-bottom: 10px;
+    }
+
+    .external-links {
+        color: white;
+        font-weight: 800;
+        padding-bottom: 15px;
+        font-size: 20px;
+    }
+
+    .developer-text {
+        color: white;
+        font-weight: 300;
+        font-family: "Lato", sans-serif;
+        font-size: 18px;
+    }
+
+    .footer-copyright {
+        color: white;
+        font-family: "Lato", sans-serif;
+        font-weight: 400;
+    }
+
+    .external-links a {
+        color: wheat;
+    }
+
+    .social-media-links a:hover {
+        text-decoration: none;
+    }
+
+    .developer-text .social-media-links a {
+        margin: 0px 4px;
+        color: white;
+        font-size: 30px;
+    }
+
+    span.developer-name {
+        font-size: 28px;
+        font-weight: 700;
+    }
+
+    .d3-tip {
+        line-height: 1.5;
+        padding: 8px;
+        background: rgba(0, 0, 0, 0.8);
+        color: #fff;
+        border-radius: 4px;
+        text-align: center;
+    }
+
+    div#vis-key {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .key-component {
+        width: 30px;
+        height: 10px;
+        display: inline-block;
+    }
+
+    .color-ticks {
+        display: inline-block;
+        width: 1px;
+        height: 10px;
+        background: #ddd;
+    }
+
+    .color-ticks {
+        display: inline-block;
+        width: 1px;
+        margin-right: 29px;
+        height: 7px;
+        background: rgba(0, 0, 0, 0.41);
+    }
+
+    .color-bracket {
+        margin-top: -17px;
+    }
+
+    .color-ticks:first-child {
+        background: transparent;
+    }
+
+    .color-num:first-child {
+        color: transparent;
+        margin-right: -10px;
+    }
+
+    .color-bins {
+        margin-top: -10px;
+    }
+
+    .color-num {
+        display: inline-block;
+        font-size: 10px;
+        font-weight: 100;
+    }
+    .key-support-text {
+        font-size: 14px;
+        margin-top: 20px;
+        font-weight: 700;
+        color: #343a3f;
+    }
+    .selectize-control.single .selectize-input:after {
+        border-width: 7px 7px 0 7px;
+        border-color: rgba(52, 58, 64, 0.83) transparent transparent transparent;
+    }
+
+    .intro-text {
+        margin-top: 20px;
+        font-weight: 100;
+    }
+    </style>
+    <style>
+        .g-instruction {
+            margin: 34px 10px 0 0;
+            font: oblique 11px sans-serif;
+            color: #aaa;
+            text-align: right;
+        }
+
+        div#vis-scatter {
+            padding: 50px;
+        }
+        .axis path {
+            stroke: rgba(0, 0, 0, 0.5);
+        }
+        g.tick line {
+            stroke: rgba(0, 0, 0, 0.5);
+        }
+        g.tick text {
+            fill: rgba(0, 0, 0, 0.83);
+            font-size: 9px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="outer-box">
+        <section class="section1">
+            <div class="row">
+                <div class="col-md-5 offset-md-1">
+                    <h1 class="header-title ">What makes a  <span class="header-title-sub">Good Government</span></h1>
+                    <div class="header-text">
+                        <span class="header-special-text">Good Governance. Freedom. Strong Socio-Economic Indicator </span>
+                        These three major aspects can be attributed to a Good Government. In the section below, the indicators showcase strong co-relation with different recognised indexes/scores.
+                    </div>
+                </div>
+                <div class="col-md-4" id="vis-container">
+                    <div class="control-group slide1-select-dropdown">
+                        <select class="demo-default form-control" id="select-dropdown" placeholder="Select Parameter">
+                        </select>
+                    </div>
+
+                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-info-circle"></i></h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    ...
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class=""></div>
+                    <svg id="globe-vis"></svg>
+
+                    <div class="row" >
+                        <div class="col-md-2 key-support-text" >Lower</div>
+                        <div class="col-md-8" id="vis-key">
+                        </div>
+                        <div class="col-md-2 key-support-text">Higher</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="section-divider"></div>
+        <section class="section-highlight container-fluid bg-dark">
+            <div class="row">
+                The indicators below are classified based on a generic aspect of a government. These are selected indicators which show good/strong co-relation with the popular indexex recognised around the world. Given the scope of data available Human Development Index, World Happiness Report Score, Sustainable Economic Development Assessment (SEDA) have been visualized with the indicators. Click on the different tabs to explore each aspects.
+            </div>
+        </section>
+        <div class="section-divider"></div>
+        <section class="section2 container-fluid">
+            <div class="row">
+                <div class="col">
+                    <ul class="nav nav-tabs sidenav nav-justified" id="v-pills-tab" role="tablist">
+                    </ul>
+                    <div class="row">
+                        <div class="col-lg-12 text-center intro-text">
+                        Each data point represent a country. The color of data point represents the Region it belongs to.
+                    </div>
+                    </div>
+                    <div class="row color-key justify-content-md-center">
+                    </div>
+                    <div class="row indexes align-bottom">
+                    </div>
+                    <div class="tab-content" id="v-pills-tabContent">
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="section-divider"></div>
+        <section class="section3">
+            <footer>
+                <div class="developer-text"> Designed and Developed by -
+                    <br><span class="developer-name">Akshay Verma</span>
+                    <div class="social-media-links">
+                        <a href="https://twitter.com/imakshayverma" target="_blank">
+                                    <i class="fa fa-twitter " aria-hidden="true"></i></a>
+                        <a href="https://github.com/imakshayverma" target="_blank"><i class="fa fa-github " aria-hidden="true"></i></a>
+                        <a href="https://www.facebook.com/Akshayverma29" target="_blank"><i class="fa fa-facebook-official " aria-hidden="true"></i></a>
+                        <a href="https://www.instagram.com/akshaysahab/" target="_blank"><i class="fa fa-instagram " aria-hidden="true"></i> </a>
+                        <a href="https://in.linkedin.com/in/imakshayverma" target="_blank"> <i class="fa fa-linkedin-square " aria-hidden="true"></i></a>
+                    </div>
+                </div>
+                <div class="footer-copyright">
+                    <p>All work under <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank">Creative Commons Attribution 4.0 (CC-BY)</a></p>
+                </div>
+            </footer>
+        </section>
+    </div>
+    <script src="jquery-3.3.1.min.js"></script>
+    <script src="popper.min.js"></script>
+    <script src="bootstrap.min.js" ></script>
+    <script src="d3.v4.min.js"></script>
+    <script src="d3-queue.v3.min.js"></script>
+    <script src="topojson.v1.min.js"></script>
+    <script src="d3-tip.js"></script>
+    <script type="text/javascript" src="selectize.min.js"></script>
+    <script type="text/javascript">
+    var select_columns = ["GINI Index", "Happy Planet Index", "Human Development Index", "World Happiness Report Score", "Sustainable Economic Development Assessment (SEDA)"];
+
+
+
+    d3.queue()
+        .defer(d3.json, "world_countries.json")
+        .defer(d3.csv, "compiled_data_2.csv")
+        .awaitAll(function(error, results) {
+            //populate_selection(results[0],results[1])
+            draw_vis(results[0], results[1], select_columns[0])
+            plotScatterMatrix(results[1])
+            //draw_table(results[1], "GINI Index")
+        });
+
+
+    function draw_vis(map, data, selector) {
+        function populate_selection() {
+            d3.select("#select-dropdown")
+                .selectAll("option")
+                .data(select_columns)
+                .enter()
+                .append("option")
+                .attr("value", function(d, i) {
+                    return d
+                })
+                .text(function(d) {
+                    return d
+                })
+
+            var $select = $('#select-dropdown').selectize({
+                sortField: {
+                    field: 'text',
+                    direction: 'asc'
+                },
+            
+                dropdownParent: 'body',
+                onChange: function(value) {
+
+                    update(value)
+                }
+            });
+
+            var selectize = $select[0].selectize;
+        }
+
+        populate_selection();
+
+        d3.select("#globe-vis").selectAll("*").remove();
+
+        var width = d3.select("#vis-container").node().getBoundingClientRect().width * .9;
+
+        height = width,
+            radius = width / 2;
+
+        var domain_key = {
+            "GINI Index": [25, 35, 45, 55, 65, 75],
+            "Happy Planet Index": [15, 22, 29, 36, 43, 50],
+            "Human Development Index": [0, 0.4, 0.52, 0.64, 0.76, 0.88],
+            "World Happiness Report Score": [3, 4, 5, 6, 7],
+            "Sustainable Economic Development Assessment (SEDA)": [25, 40, 55, 70, 85]
+
+        }
+
+        var paddingRight = {
+            "GINI Index": "20px",
+            "Happy Planet Index": "20px",
+            "Human Development Index": "11px",
+            "Sustainable Economic Development Assessment (SEDA)": "20px",
+            "World Happiness Report Score": "26px",
+        }
+
+
+        var originalScale = height / 2,
+            scale = originalScale,
+            translation = [width / 2, height / 2],
+            scaleChange,
+            rotation,
+            rotate = [30, -100],
+            velocity = [0.004, 0],
+            time = Date.now();
+
+        var origin = [-61, 32],
+            velocity = [.005, -.002],
+            t0 = Date.now();
+
+        var projection = d3.geoOrthographic()
+            .scale(radius)
+            .translate([width / 2, height / 2])
+            .clipAngle(90)
+        //.rotate([0, -120, 0]);
+        var graticule = d3.geoGraticule();
+
+        var path = d3.geoPath().projection(projection);
+
+        var tip = d3.tip()
+            .attr('class', 'd3-tip')
+            .offset([-5, 0])
+            .html(function(d) {
+                if (d.selector) {
+                    return d.properties.name + " : " + d.selector;
+                }
+                return d.properties.name + " : N.A"
+
+            })
+
+        var svg = d3.select("#globe-vis")
+            .attr("width", width)
+            .attr("height", height)
+            .on("mouseover", function(d) {
+                stopGlobe();
+            })
+            .on("mouseout", function(d) {
+                startGlobe();
+            });
+
+    
+        var color = d3.scaleThreshold()
+            .domain(domain_key[selector])
+            .range(["#662506", "#993404", "#cc4c02", "#ec7014", "#fe9929", "#fec44f", "#fff7bc"]);
+        //.range(['#ffffd4', '#fee391', '#fec44f', '#fe9929', '#d95f0e', '#993404'].reverse());
+
+        svg.append("circle")
+            .attr("cx", width / 2)
+            .attr("cy", height / 2)
+            .attr("r", radius);
+
+        svg
+            .append("path")
+            .datum(graticule)
+            .attr("class", "graticule")
+            .attr("d", path);
+
+        svg.call(tip);
+
+        selector_mapping = {}
+        data.forEach(function(d) { selector_mapping[d["ISO Country code"]] = +d[selector]; });
+        map.features.forEach(function(d) { d.selector = selector_mapping[d.id] });
+
+        var feature = svg.append("g")
+            .attr("class", "countries")
+            .selectAll("path")
+            .data(map.features)
+            .enter().append("path")
+            .attr("d", path)
+            .style("fill", function(d) {
+                if (d.selector) {
+                    return color(selector_mapping[d.id]);
+                } else {
+                    return "#ddd";
+                }
+            })
+            .style('stroke', 'white')
+            .attr("class", "foreground")
+            .style('stroke-width', 0.5)
+            .style("opacity", 0.8)
+            .style("stroke", "#343a40")
+            .style('stroke-width', 0.3)
+            .on('mouseover', function(d) {
+                tip.show(d)
+                d3.select(this)
+                    .style("opacity", 1)
+                    .style("stroke", "#343a40")
+                    .style("stroke-width", 1);
+            })
+            .on('mouseout', function(d) {
+                tip.hide()
+                d3.select(this)
+                    .style("opacity", 0.8)
+                    .style("stroke", "#343a40")
+                    .style("stroke-width", 0.3);
+            });
+
+        var visKey = d3.select("#vis-key").append("div")
+            .attr("class", "color-swatch")
+            .selectAll("div")
+            .data(domain_key[selector])
+            .enter()
+            .append("div")
+            .attr("class", "key-component")
+            .style("background", function(d, i) {
+                return color(d);
+            })
+
+        d3.select("#vis-key").append("div")
+            .attr("class", "color-bracket")
+            .selectAll("div")
+            .data(domain_key[selector])
+            .enter()
+            .append("div")
+            .attr("class", "color-ticks")
+
+        d3.select("#vis-key").append("div")
+            .attr("class", "color-bins")
+            .selectAll("div")
+            .data(domain_key[selector])
+            .enter()
+            .append("div")
+            .attr("class", "color-num")
+            .style("padding-right", function(d) {
+                return paddingRight[selector];
+            })
+            .text(function(d) {
+                return d;
+            })
+
+
+
+
+        //Rotation
+        var feature = svg.selectAll(".foreground, .graticule");
+
+        timer = d3.timer(function() {
+            var dt = Date.now() - time;
+            projection.rotate([rotate[0] + velocity[0] * dt, -20]);
+            feature.attr("d", path);
+        });
+
+        //Drag
+        var λ = d3
+            .scaleLinear()
+            .domain([0, width])
+            .range([-180, 180]);
+        var φ = d3
+            .scaleLinear()
+            .domain([0, height])
+            .range([90, -90]);
+
+        var drag = d3
+            .drag()
+            .subject(function() {
+                var r = projection.rotate();
+                return {
+                    x: λ.invert(r[0]),
+                    y: φ.invert(r[1])
+                };
+            })
+            .on("drag", function() {
+                //stopGlobe();
+                projection.rotate([λ(d3.event.x), φ(d3.event.y)]);
+                feature.attr("d", path);
+            })
+            .on("end", function() {
+                //startGlobe();
+            });
+
+        svg.call(drag);
+
+        function stopGlobe() {
+            timer.stop();
+        }
+
+        function startGlobe() {
+            var r = projection.rotate()[0];
+            var k = projection.rotate()[1];
+            time = Date.now();
+            timer.restart(function() {
+                var dt = Date.now() - time;
+                projection.rotate([r + velocity[0] * dt, k]);
+                feature.attr("d", path);
+            });
+        }
+
+        function update(selector) {
+            //feature.exit().remove()
+            var color = d3.scaleThreshold()
+                .domain(domain_key[selector])
+                .range(["#662506", "#993404", "#cc4c02", "#ec7014", "#fe9929", "#fec44f", "#fff7bc"]);
+
+            data.forEach(function(d) { selector_mapping[d["ISO Country code"]] = +d[selector]; });
+            map.features.forEach(function(d) { d.selector = selector_mapping[d.id] });
+
+            d3.select("#vis-key").html("")
+            var visKey = d3.select("#vis-key").append("div")
+                .attr("class", "color-swatch")
+                .selectAll("div")
+                .data(domain_key[selector])
+                .enter()
+                .append("div")
+                .attr("class", "key-component")
+                .style("background", function(d, i) {
+                    return color(d);
+                })
+
+            d3.select("#vis-key").append("div")
+                .attr("class", "color-bracket")
+                .selectAll("div")
+                .data(domain_key[selector])
+                .enter()
+                .append("div")
+                .attr("class", "color-ticks")
+
+            d3.select("#vis-key").append("div")
+                .attr("class", "color-bins")
+                .selectAll("div")
+                .data(domain_key[selector])
+                .enter()
+                .append("div")
+                .attr("class", "color-num")
+                .style("padding-right", function(d) {
+                    return paddingRight[selector];
+                })
+                .text(function(d) {
+                    return d;
+                })
+
+            var feature = svg.select("g")
+                .selectAll("path")
+                .data(map.features)
+                .transition()
+                .delay(500)
+                .style("fill", function(d) {
+                    if (d.selector) {
+                        return color(selector_mapping[d.id]);
+                    } else {
+                        return "#ddd";
+                    }
+                })
+        }
+    }
+
+
+    function plotScatterMatrix(data) {
+        indexes = ["Human Development Index", "World Happiness Report Score", "Sustainable Economic Development Assessment (SEDA)"]
+
+        theme_indicators = [{
+            "theme": "Governance",
+            "indicator": ["Government Effectiveness", "Government Integrity Score", "Rule of Law", "Control of Corruption", "Political Stability & Absence of Violence"]
+        }, {
+            "theme": "Freedom",
+            "indicator": ["Regulatory Quality", "Judicial Effectiveness Score", "Overall Economic Freedom Score", "Financial Freedom Score"]
+        }, {
+            "theme": "Socio-Economic",
+            "indicator": ["GDP Per Capita (PPP)", "Health Expenditure Per Person", "Education Expenditure per Person ", "School Life Expectancy (YEARS)", "Property Rights Score"]
+        }]
+
+
+        var scatterLinks = d3.select("#v-pills-tab")
+            .selectAll("li")
+            .data(theme_indicators)
+            .enter()
+            .append("li")
+            .attr("class", "nav-item")
+            .append("a")
+            .attr("class", function(d, i) {
+                if (i == 0) {
+                    return "nav-link active"
+                } else {
+                    return "nav-link "
+                }
+            })
+            .attr("data-toggle", "tab")
+            .attr("href", function(d) {
+                return "#" + d.theme.replace(/ /g, '')
+            })
+            .attr("role", "tab")
+            .attr("aria-controls", function(d) {
+                return "v-pills-" + d.theme
+            })
+            .attr("aria-selected", function(d, i) {
+                if (i == 0) {
+                    return "true"
+                } else {
+                    return "false"
+                }
+            })
+            .text(function(d) {
+                return d.theme
+            })
+
+
+
+        var scatterTheme = d3.select("#v-pills-tabContent").selectAll("div")
+            .data(theme_indicators)
+            .enter()
+            .append("div")
+            .attr("class", function(d, i) {
+                if (i == 0) {
+                    return "tab-pane fade show active"
+                } else {
+                    return "tab-pane fade"
+                }
+            })
+            .attr("role", "tabpanel")
+            .attr("id", function(d) {
+                return d.theme.replace(/ /g, '')
+            })
+            .attr("aria-labelledby", "v-pills-home-tab")
+
+
+
+        var scatterRows = scatterTheme.selectAll("div")
+            .data(function(d) {
+                return d.indicator
+            })
+            .enter()
+            .append("div")
+            .attr("class", function(d, i) {
+                if (i == 0) {
+                    return "active row indicator-row"
+                } else {
+                    return "row indicator-row"
+                }
+            })
+            .attr("id", function(d, i) {
+                return "row-" + i
+            })
+            .attr("data-indi", function(d) {
+                return d
+            })
+
+
+
+        var scatterBlock = scatterRows.selectAll("div")
+            .data(indexes)
+            .enter()
+            .append("div")
+            .attr("class", "col-md-3")
+            /*.attr("id", function(d, i, j) {
+        
+            })*/
+            .attr("data-index", function(d) {
+                return d
+            })
+
+        scatterRows.insert("div", ":first-child")
+            .attr("class", "col-lg-2 indicator align-self-center")
+            .text(function(d) {
+                return d3.select(this.parentNode).datum()
+            })
+
+        scatterBlock.append("svg")
+            .attr("id", function(d, i, j) {
+                //console.log(d, i , j)
+            })
+            .each(function(d) {
+
+                plot(d3.select(this.parentNode).datum(), this.parentNode.parentNode.getAttribute("data-indi"), this)
+
+            })
+
+        var indexexHead = d3.select(".indexes").selectAll("div")
+            .data(indexes)
+            .enter()
+            .append("div")
+            .attr("class", "col-md-3 header-index")
+            .text(function(d) {
+                return d;
+            })
+
+        d3.select(".indexes").insert("div", ":first-child")
+            .attr("class", "col-md-2")
+        var colorArray = ['#3080BF', '#FF8B00', '#00AC33', '#E30000', '#A965C4']
+
+        var colorKey = d3.select(".color-key").selectAll("div")
+            .data(["Asia", "Europe", "Africa", "Americas", "Oceania"])
+            .enter()
+            .append("div")
+            .attr("class", "col-md-2")
+
+
+        colorKey.append("span")
+            .attr("class", "key-color")
+            .style("background", function(d, i) {
+                return colorArray[i]
+            })
+
+        colorKey.append("span")
+            .attr("class", "key-text")
+            .text(function(d) {
+                return d;
+            })
+
+
+
+        function plot(selector_index, selector_indicator, selection) {
+            filter_data = data.filter(function(d) {
+                return (d[selector_index] != "" && d[selector_indicator] != "")
+            })
+            var margin = { top: 20, right: 0, bottom: 30, left: 20 },
+                //width = selection.parentNode.getBoundingClientRect().width - margin.left - margin.right,
+                width = 200 - margin.left - margin.right,
+                //height = selection.parentNode.getBoundingClientRect().width - margin.bottom - margin.top;
+                height = 200 - margin.bottom - margin.top;
+
+            color = d3.scaleOrdinal()
+                .domain(["Asia", "Europe", "Africa", "Americas", "Oceania"])
+                .range(['#3080BF', '#FF8B00', '#00AC33', '#E30000', '#A965C4'])
+
+            var xScale = d3.scaleLinear()
+                //.domain(["Alabama","Alaska","Arizona","Arkansas","California"])
+                .domain([0, d3.max(data, function(d) { return +d[selector_index]; })])
+                //.range([padding, w-padding * 2]);
+                .range([0, width]);
+
+            indicator_min = d3.min(filter_data, function(d) { return +d[selector_indicator]; })
+
+            if (indicator_min < 0) {
+                ymin = indicator_min
+            } else {
+                ymin = 0
+            }
+
+            var yScale = d3.scaleLinear()
+                .domain([ymin, d3.max(data, function(d) { return +d[selector_indicator]; })])
+                //.range([padding, w-padding * 2]);
+                .range([height, 0]);
+
+
+            var xAxis = d3.axisBottom(xScale).ticks(5);
+
+            var yAxis = d3.axisLeft(yScale).ticks(5);
+
+            //create svg element
+            var svg = d3.select(selection)
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.bottom + margin.top)
+                .append("g")
+                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+            svg.selectAll("circle")
+                .data(filter_data)
+                .enter()
+                .append("circle")
+                .attr("cx", function(d) {
+                    return xScale(d[selector_index]);
+                })
+                .attr("cy", function(d) {
+                    return yScale(d[selector_indicator]);
+                })
+                .attr("r", 2.5)
+                .attr("fill", function(d) {
+                    return color(d.region)
+                });
+
+            //x axis
+            svg.append("g")
+                .attr("class", "x axis")
+                .attr("transform", "translate(0," + height + ")")
+                .call(xAxis);
+
+            //y axis
+            svg.append("g")
+                .attr("class", "y axis")
+                //.attr("transform", "translate(" + margin.left + ",0)")
+                .call(yAxis)
+        }
+    }
+    </script>
+</body>
+
+</html>
