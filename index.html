@@ -2,9 +2,10 @@
 
 <head>
     <meta charset="utf-8">
+    <link rel="icon" href="spinner10.png" type="image/gif" sizes="16x16">
     <link rel="stylesheet" href="bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,900" rel="stylesheet">
-  
+    <title>What makes a Good Government? - Akshay Verma</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <style>
     /**
@@ -214,7 +215,7 @@
     .selectize-dropdown-content {
         overflow-y: auto;
         overflow-x: hidden;
-        max-height: 200px;
+        max-height: 300px;
         -webkit-overflow-scrolling: touch;
     }
 
@@ -553,9 +554,9 @@
 
     .graticule {
         fill: none;
-        stroke: rgba(0, 0, 0, 0.5);
+        stroke: rgba(0, 0, 0, 0.7);
         stroke-width: .6px;
-        stroke-opacity: .1;
+        stroke-opacity: .17;
     }
 
     .header-title {
@@ -830,6 +831,29 @@
             font-size: 9px;
         }
     </style>
+    <style type="text/css">
+    .selectize-dropdown .title {
+        font-size: 16px;
+        display: block;
+        opacity: 0.9;
+        font-weight: 600;
+    }
+    .selectize-dropdown .description {
+        font-size: 13px;
+        display: block;
+        opacity: 0.9;
+        font-weight: 100;
+        /*white-space: nowrap;
+        width: 100%;
+        text-overflow: ellipsis;
+        overflow: hidden;*/
+    }
+    .selectize-dropdown .option{
+        padding:15px 5px 15px 15px;
+        border: 1px solid #ddd;
+        cursor: pointer;
+    }
+    </style>
 </head>
 
 <body>
@@ -840,33 +864,13 @@
                     <h1 class="header-title ">What makes a  <span class="header-title-sub">Good Government</span></h1>
                     <div class="header-text">
                         <span class="header-special-text">Good Governance. Freedom. Strong Socio-Economic Indicator </span>
-                        These three major aspects can be attributed to a Good Government. In the section below, the indicators showcase strong co-relation with different recognised indexes/scores.
+                        Good Governance. Freedom. Strong Socio-Economic Indicator These three major aspects can be attributed to a Good Government. In the section below, the indicators showcase strong co-relations with different recognized indexes/scores.
                     </div>
                 </div>
                 <div class="col-md-4" id="vis-container">
                     <div class="control-group slide1-select-dropdown">
                         <select class="demo-default form-control" id="select-dropdown" placeholder="Select Parameter">
                         </select>
-                    </div>
-
-                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-info-circle"></i></h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    ...
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary">Save changes</button>
-                                </div>
-                            </div>
-                        </div>
                     </div>
 
                     <div class=""></div>
@@ -884,7 +888,7 @@
         <div class="section-divider"></div>
         <section class="section-highlight container-fluid bg-dark">
             <div class="row">
-                The indicators below are classified based on a generic aspect of a government. These are selected indicators which show good/strong co-relation with the popular indexex recognised around the world. Given the scope of data available Human Development Index, World Happiness Report Score, Sustainable Economic Development Assessment (SEDA) have been visualized with the indicators. Click on the different tabs to explore each aspects.
+                The indicators below are classified based on a generic aspect of a government. These are selected indicators which show good/strong co-relation with the popular indexes recognized around the world. Given the scope of data available Human Development Index, World Happiness Report Score, Sustainable Economic Development Assessment (SEDA) have been visualized with the indicators. Click on the different tabs to explore each aspect.
             </div>
         </section>
         <div class="section-divider"></div>
@@ -953,7 +957,7 @@
 
     function draw_vis(map, data, selector) {
         function populate_selection() {
-            d3.select("#select-dropdown")
+            /*d3.select("#select-dropdown")
                 .selectAll("option")
                 .data(select_columns)
                 .enter()
@@ -963,13 +967,39 @@
                 })
                 .text(function(d) {
                     return d
-                })
+                })*/
 
             var $select = $('#select-dropdown').selectize({
                 sortField: {
                     field: 'text',
                     direction: 'asc'
                 },
+                valueField: 'title',
+                searchField: 'title',
+                options: [
+                        {title: 'GINI Index', description: ' Index to measuring income distribution among a population. 0 - Perfect equality and 1 Perfect inequality. '},
+                        {title: 'Happy Planet Index', description: 'Index of human well-being and environmental impact. Higher scores for nations with lower ecological footprints. '},
+                        {title: 'Human Development Index', description: 'Index of life expectancy, education, and per capita income indicators.'},
+                        {title: 'World Happiness Report Score', description: 'Scores based on polled inhabitants rating their quality of life from 1-10'},
+                        {title: 'Sustainable Economic Development Assessment (SEDA)', description: 'An assessment based on 40 indicators in sustainability, economics, & investments (higher = better)'},
+                    ],
+                    render: {
+                        option: function(data, escape, i) {
+                            return '<div class="option">' +
+                                    '<span class="title">' + escape(data.title) + '</span>' +
+                                    '<span class="description">' + escape(data.description) + '</span>' +
+                                '</div>';
+                        },
+                        item: function(data, escape) {
+                            return '<div class="item">' + escape(data.title) + '</div>';
+                        }
+                    },
+                    create: function(input) {
+                        return {
+                            title: input,
+                            url: '#'
+                        };
+                    },
             
                 dropdownParent: 'body',
                 onChange: function(value) {
@@ -979,9 +1009,11 @@
             });
 
             var selectize = $select[0].selectize;
+            selectize.setValue(selectize.search("GINI Index").items[0].id);
+            console.log(selectize.search("GINI Index").items[0].id)
         }
 
-        populate_selection();
+        
 
         d3.select("#globe-vis").selectAll("*").remove();
 
@@ -1200,6 +1232,8 @@
 
         function update(selector) {
             //feature.exit().remove()
+
+            console.log(selector, domain_key)
             var color = d3.scaleThreshold()
                 .domain(domain_key[selector])
                 .range(["#662506", "#993404", "#cc4c02", "#ec7014", "#fe9929", "#fec44f", "#fff7bc"]);
@@ -1254,6 +1288,8 @@
                     }
                 })
         }
+
+        populate_selection();
     }
 
 
